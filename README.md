@@ -1,2 +1,1 @@
-# ML_PREP
-Preparation for summer teaching in Machine Learning
+MARGIE, and the death of John 
