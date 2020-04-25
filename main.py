@@ -4,7 +4,7 @@ import Distance
 
 def main():
     print("Reading file...")
-    texts = CSV.read_to_list("data/babel_paraphrases_bert_classifications.tsv")
+    texts = CSV.read_to_list("data/babel_paraphrases_bert_classifications.tsv", "tsv")
     print("++++++++++++++++++++++++++++++\nReading done")
 
     # text1, text2 = Distance.getInputs()
@@ -12,14 +12,13 @@ def main():
 
     print("Calculating...")
     output = []
-
     i = 0
     for pairs in texts:
-        print(i/186624)
-        editDistance = str(Distance.editDistance(pairs[0], pairs[1]))
-        jaccardDistance = str(Distance.jaccardDistance(pairs[0], pairs[1]))
-        output.append([pairs[0], pairs[1], editDistance, jaccardDistance])
-        i+=1
+        print(i / 186624)
+        editDistance = str(Distance.editDistance(pairs[2], pairs[3]))
+        jaccardDistance = str(Distance.jaccardDistance(pairs[2], pairs[3]))
+        output.append([pairs[0], pairs[1], jaccardDistance, editDistance])
+        i += 1
     print("Calculation done.")
 
     print(output)
