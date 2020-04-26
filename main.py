@@ -1,6 +1,6 @@
 import CSV
 import Distance
-
+import Sort
 
 def main():
     print("Reading file...")
@@ -30,5 +30,8 @@ def main():
     # print("++++++++++++++++++++++++++++++++++++\n" +
     #      "Edit distance: " + editDistance + "\nJaccard distance: " + jaccardDistance)
 
+    print("Sorting...")
+    Sort.sort()
+    print("Sorting done")
 
 main()

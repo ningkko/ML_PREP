@@ -30,4 +30,6 @@ def jaccardDistance(text1, text2):
 
 
 def editDistance(text1, text2):
-    return nltk.edit_distance(text1, text2)
+    token1 = nltk.word_tokenize(text1)
+    token2 = nltk.word_tokenize(text2)
+    return nltk.edit_distance(token1, token2)
