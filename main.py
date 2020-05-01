@@ -1,10 +1,9 @@
 import CSV
 import Distance
 import Sort
+import histogram
 import numpy as np
-import matplotlib.pyplot as plt
-
-
+import pandas as pd
 def main():
     print("Reading file...")
     texts = CSV.read_to_list("data/babel_paraphrases_bert_classifications.tsv", "tsv")
@@ -37,6 +36,9 @@ def main():
         bert_number_1_g8 = 0
         # number of pairs with ED >= 8
         ED_number_g8 = 0
+
+        # bins for histogram
+        edit_bins = []
 
         lst = [pairs[0], pairs[1], str(jaccardDistance), str(editDistance), pairs[2], pairs[3], len_sent1, len_sent2]
         output.append(lst)
@@ -73,15 +75,15 @@ def main():
 
     print("Writing results to file...")
 
-    txt = open("output.txt", "w")
+    txt = open("outputs/output.txt", "w")
     txt.write("original_median: " + str(original_median) + "\n" +
               "original_mean: " + str(original_mean) + "\n" +
               "% of bert == 1: " + str(bert_number_1_g8 / ED_number_g8))
 
     txt.close()
 
-    CSV.write("output.csv", output)
-    CSV.write("output_e>8.csv", output_E8)
+    CSV.write_data("outputs/output.csv", output)
+    CSV.write_data("outputs/output_e>8.csv", output_E8)
     print("++++++++++++++++++++++++++++++\nWriting done")
 
     # print("++++++++++++++++++++++++++++++++++++\n" +
@@ -90,6 +92,15 @@ def main():
     print("Sorting...")
     Sort.sort()
     print("Sorting done")
+
+    edit_hist = histogram.edit_hist()
+    jaccard_hist = histogram.jaccard_hist()
+
+    edit_hist_df = pd.DataFrame(edit_hist)
+    edit_hist_df.to_csv('outputs/edit_histogram.csv', index=False)
+
+    jaccard_hist_df = pd.DataFrame(jaccard_hist)
+    jaccard_hist_df.to_csv('outputs/jaccard_histogram.csv', index=False)
 
 
 main()

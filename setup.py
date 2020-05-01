@@ -3,7 +3,11 @@ import setuptools
 with open("README.md", "r") as fh:
     readme = fh.read()
 
-requires = ['nltk']
+requires = ['nltk',
+            'numpy',
+            'matplotlib',
+            'pandas',
+            'scipy']
 setuptools.setup(
     name="Conceptual dependency",
     version="0.0.1",
