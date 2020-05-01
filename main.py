@@ -20,6 +20,11 @@ def main():
     # mean and median of the first 432 original lines of file
     original_sentences_len = []
 
+    # number of pairs with ED >= 8 and bert numbers == 1
+    bert_number_1_g8 = 0
+    # number of pairs with ED >= 8
+    ED_number_g8 = 0
+
     i = 0
     for pairs in texts:
         # progress
@@ -37,16 +42,13 @@ def main():
         len_sent2 = len(sent2.split(" "))
 
         bert_classification = pairs[2]
-        # number of pairs with ED >= 8 and bert numbers == 1
-        bert_number_1_g8 = 0
-        # number of pairs with ED >= 8
-        ED_number_g8 = 0
 
         # bins for histogram
         edit_bins = []
 
         # a return list
         lst = [pairs[0], pairs[1], str(jaccardDistance), str(editDistance), pairs[2], pairs[3], len_sent1, len_sent2]
+        lst_with_bert = [pairs[0], pairs[1], bert_classification, str(jaccardDistance), str(editDistance), pairs[2], pairs[3], len_sent1, len_sent2]
 
         output.append(lst)
 
@@ -63,13 +65,10 @@ def main():
         if i <= 431:
             original_sentences_len.append(len_sent2)
 
-        '''
         # For test
-        
-        if i > 300:
-            break
-        '''
 
+        if i > 500:
+            break
         i += 1
 
     # calculate median and mean
@@ -97,12 +96,12 @@ def main():
     txt = open("outputs/output.txt", "w")
     txt.write("original_median: " + str(original_median) + "\n" +
               "original_mean: " + str(original_mean) + "\n" +
-              "% of bert == 1: " + str(bert_number_1_g8 / ED_number_g8))
+              "% of bert == 1: " + str(ED_number_g8))
 
     txt.close()
 
     CSV.write_data("outputs/output.csv", output)
-    CSV.write_data("outputs/output_e>8.csv", output_E8)
+    CSV.write_data("outputs/output_e8.csv", output_E8, with_bert=True)
     print("++++++++++++++++++++++++++++++\nWriting done")
 
     # print("++++++++++++++++++++++++++++++++++++\n" +

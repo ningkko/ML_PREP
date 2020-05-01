@@ -23,12 +23,17 @@ def read_to_list(file_path, file_type):
     return texts
 
 
-def write_data(file_path, output_file):
+def write_data(file_path, output_file, with_bert=False):
     with open(file_path, 'w') as file:
         pen = csv.writer(file)
 
-        pen.writerow(['ID1'] + ['ID2'] + ['Jaccard distance'] + ['Levenshtein distance'] + ['text1'] + ['text2'] +
-                     ["#text1"] + ['#text2'])
+        if with_bert:
+            pen.writerow(['ID1'] + ['ID2'] + ["Bert"] + ['Jaccard distance'] + ['Levenshtein distance'] + ['text1'] + ['text2'] +
+                         ["#text1"] + ['#text2'])
+        else:
+            pen.writerow(['ID1'] + ['ID2'] + ['Jaccard distance'] + ['Levenshtein distance'] + ['text1'] + ['text2'] +
+                         ["#text1"] + ['#text2'])
+
         for row in output_file:
             pen.writerow(row)
 
