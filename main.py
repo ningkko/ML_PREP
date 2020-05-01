@@ -13,7 +13,11 @@ def main():
     print(len(texts))
 
     print("Calculating...")
+    # stores all output with text, distances and text lengths
     output = []
+    # only output with edit_distance>= 8
+    output_E8 = []
+
     # mean and median of the first 432 original lines of file
     original_sentences_len = []
 
@@ -22,11 +26,15 @@ def main():
         print(i / 186624)
         sent1 = pairs[2]
         sent2 = pairs[3]
-        editDistance = str(Distance.editDistance(sent1, sent2))
-        jaccardDistance = str(Distance.jaccardDistance(sent1, sent2))
+        editDistance = Distance.editDistance(sent1, sent2)
+        jaccardDistance = Distance.jaccardDistance(sent1, sent2)
         len_sent1 = len(sent1.split(" "))
         len_sent2 = len(sent2.split(" "))
-        output.append([pairs[0], pairs[1], jaccardDistance, editDistance, pairs[2], pairs[3], len_sent1, len_sent2])
+        lst = [pairs[0], pairs[1], str(jaccardDistance), str(editDistance), pairs[2], pairs[3], len_sent1, len_sent2]
+        output.append(lst)
+
+        if editDistance >= 8:
+            output_E8.append(lst)
 
         if i <= 431:
             original_sentences_len.append(len_sent2)
@@ -43,6 +51,10 @@ def main():
 
     for o in output:
         print(o)
+
+    for o8 in output_E8:
+        print(o8)
+
     print("original_median: " + str(original_median) + "\n" +
           "original_mean: " + str(original_mean))
 
@@ -54,6 +66,7 @@ def main():
     txt.close()
 
     CSV.write("output.csv", output)
+    CSV.write("output_e>8.csv", output_E8)
     print("++++++++++++++++++++++++++++++\nWriting done")
 
     # print("++++++++++++++++++++++++++++++++++++\n" +
