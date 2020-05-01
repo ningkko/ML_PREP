@@ -10,7 +10,6 @@ def main():
     print("++++++++++++++++++++++++++++++\nReading done")
 
     # text1, text2 = Distance.getInputs()
-    print(len(texts))
 
     print("Calculating...")
     # stores all output with text, distances and text lengths
@@ -23,11 +22,17 @@ def main():
 
     i = 0
     for pairs in texts:
+        # progress
         print(i / 186624)
+
         sent1 = pairs[2]
         sent2 = pairs[3]
+
+        # distances
         editDistance = Distance.editDistance(sent1, sent2)
         jaccardDistance = Distance.jaccardDistance(sent1, sent2)
+
+        # sentence lengths
         len_sent1 = len(sent1.split(" "))
         len_sent2 = len(sent2.split(" "))
 
@@ -40,40 +45,54 @@ def main():
         # bins for histogram
         edit_bins = []
 
+        # a return list
         lst = [pairs[0], pairs[1], str(jaccardDistance), str(editDistance), pairs[2], pairs[3], len_sent1, len_sent2]
+
         output.append(lst)
 
+        # -------- add pairs with edit distances >= 8
         if editDistance >= 8:
             output_E8.append(lst)
             ED_number_g8 += 1
 
+            # number of pairs with bert classification as 1
             if bert_classification == 1:
                 bert_number_1_g8 += 1
 
+        # finds the original sentences
         if i <= 431:
             original_sentences_len.append(len_sent2)
 
+        '''
+        # For test
+        
         if i > 300:
             break
+        '''
 
         i += 1
 
+    # calculate median and mean
     original_median = np.median(original_sentences_len)
     original_mean = np.mean(original_sentences_len)
 
     print("Calculation done.")
 
+    '''
+    # print outputs for test
     for o in output:
         print(o)
 
     for o8 in output_E8:
         print(o8)
+    '''
 
     print("original_median: " + str(original_median) + "\n" +
           "original_mean: " + str(original_mean) + "\n" +
           "% of bert == 1: " + str(bert_number_1_g8 / ED_number_g8))
 
-    print("Writing results to file...")
+    print("-------------------------------------\n"
+          "Writing results to file...")
 
     txt = open("outputs/output.txt", "w")
     txt.write("original_median: " + str(original_median) + "\n" +
@@ -101,6 +120,8 @@ def main():
 
     jaccard_hist_df = pd.DataFrame(jaccard_hist)
     jaccard_hist_df.to_csv('outputs/jaccard_histogram.csv', index=False)
+
+    print("Showing histograms. Close windows to quit.")
 
 
 main()
