@@ -4,6 +4,8 @@ import Sort
 import histogram
 import numpy as np
 import pandas as pd
+
+
 def main():
     print("Reading file...")
     texts = CSV.read_to_list("data/babel_paraphrases_bert_classifications.tsv", "tsv")
@@ -30,8 +32,11 @@ def main():
         # progress
         print(i / 186624)
 
-        sent1 = pairs[2]
-        sent2 = pairs[3]
+        text_num_1 = pairs[0]
+        text_num_2 = pairs[1]
+        bert_classification = pairs[2]
+        sent1 = pairs[3]
+        sent2 = pairs[4]
 
         # distances
         editDistance = Distance.editDistance(sent1, sent2)
@@ -41,14 +46,13 @@ def main():
         len_sent1 = len(sent1.split(" "))
         len_sent2 = len(sent2.split(" "))
 
-        bert_classification = pairs[2]
-
         # bins for histogram
         edit_bins = []
 
         # a return list
-        lst = [pairs[0], pairs[1], str(jaccardDistance), str(editDistance), pairs[2], pairs[3], len_sent1, len_sent2]
-        lst_with_bert = [pairs[0], pairs[1], bert_classification, str(jaccardDistance), str(editDistance), pairs[2], pairs[3], len_sent1, len_sent2]
+        lst = [text_num_1, text_num_2, str(jaccardDistance), str(editDistance), sent1, sent2, len_sent1, len_sent2]
+        lst_with_bert = [text_num_1, text_num_2, bert_classification, str(jaccardDistance), str(editDistance), sent1,
+                         sent2, len_sent1, len_sent2]
 
         output.append(lst)
 
@@ -58,7 +62,7 @@ def main():
             ED_number_g8 += 1
 
             # number of pairs with bert classification as 1
-            if bert_classification == 1:
+            if int(bert_classification) == 1:
                 bert_number_1_g8 += 1
 
         # finds the original sentences
@@ -67,8 +71,9 @@ def main():
 
         # For test
 
-        ''' if i > 500:
-            break
+        '''
+        if i > 500:
+        break
         '''
 
         i += 1
@@ -98,7 +103,7 @@ def main():
     txt = open("outputs/output.txt", "w")
     txt.write("original_median: " + str(original_median) + "\n" +
               "original_mean: " + str(original_mean) + "\n" +
-              "% of bert == 1: " + str(ED_number_g8))
+              "% of bert == 1: " + str(ED_number_g8 / ED_number_g8))
 
     txt.close()
 
@@ -121,8 +126,6 @@ def main():
 
     jaccard_hist_df = pd.DataFrame(jaccard_hist)
     jaccard_hist_df.to_csv('outputs/jaccard_histogram.csv', index=False)
-
-    print("Showing histograms. Close windows to quit.")
 
 
 main()

@@ -28,11 +28,3 @@ def jaccard_hist():
     plt.show()
 
     return np.histogram(data, bins=bin_max)
-
-
-def main():
-    edit_hist()
-    jaccard_hist()
-
-
-main()

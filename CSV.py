@@ -15,9 +15,10 @@ def read_to_list(file_path, file_type):
             # data in the format of ['0', '0', '1', 'John died because he was unable to breathe .', 'John died
             # because he was unable to breathe .']
             num1, num2 = row[0], row[1]
+            bert_classification = row[2]
             text1, text2 = row[3].replace(" .", ""), row[4].replace(" .", "")
 
-            texts.append([num1, num2, text1, text2])
+            texts.append([num1, num2, bert_classification, text1, text2])
 
     file.close()
     return texts
