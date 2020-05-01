@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
+
 def edit_hist():
     df = pd.read_csv('outputs/output.csv')
     data = df["Levenshtein distance"].tolist()
@@ -27,3 +28,11 @@ def jaccard_hist():
     plt.show()
 
     return np.histogram(data, bins=bin_max)
+
+
+def main():
+    edit_hist()
+    jaccard_hist()
+
+
+main()
