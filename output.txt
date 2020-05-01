@@ -1,0 +1,2 @@
+original_median: 13.0
+original_mean: 12.619205298013245

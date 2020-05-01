@@ -27,7 +27,7 @@ def write(file_path, output_file):
     with open(file_path, 'w') as file:
         pen = csv.writer(file)
 
-        pen.writerow(['ID1'] + ['ID2'] + ['Jaccard distance'] + ['Levenshtein distance'] + ['text1'] + ['text2'])
+        pen.writerow(['ID1'] + ['ID2'] + ['Jaccard distance'] + ['Levenshtein distance'] + ['text1'] + ['text2']  + ['#text2'])
         for row in output_file:
             pen.writerow(row)
 
