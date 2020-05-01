@@ -67,8 +67,10 @@ def main():
 
         # For test
 
-        if i > 500:
+        ''' if i > 500:
             break
+        '''
+
         i += 1
 
     # calculate median and mean
