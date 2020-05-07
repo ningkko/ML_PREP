@@ -8,6 +8,7 @@ requires = ['nltk',
             'matplotlib',
             'pandas',
             'scipy']
+
 setuptools.setup(
     name="Conceptual dependency",
     version="0.0.1",
