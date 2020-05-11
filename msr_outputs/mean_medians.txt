@@ -1,0 +1,4 @@
+edit_median: 11.0
+edit_mean: 11.570936045509395
+jaccard_median: 0.4857142857142857
+jaccard_mean: 0.4810149572996388

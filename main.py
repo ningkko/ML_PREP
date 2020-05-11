@@ -39,23 +39,23 @@ def main():
         sent2 = pairs[4]
 
         # distances
-        editDistance = Distance.editDistance(sent1, sent2)
-        jaccardDistance = Distance.jaccardDistance(sent1, sent2)
+        edit_distance = Distance.editDistance(sent1, sent2)
+        jaccard_distance = Distance.jaccardDistance(sent1, sent2)
 
         # sentence lengths
         len_sent1 = len(sent1.split(" "))
         len_sent2 = len(sent2.split(" "))
 
         # a return list
-        lst = [text_num_1, text_num_2, str(jaccardDistance), str(editDistance), sent1, sent2, len_sent1, len_sent2]
-        lst_with_bert = [text_num_1, text_num_2, bert_classification, str(jaccardDistance), str(editDistance), sent1,
+        lst = [text_num_1, text_num_2, str(jaccard_distance), str(edit_distance), sent1, sent2, len_sent1, len_sent2]
+        lst_with_bert = [text_num_1, text_num_2, bert_classification, str(jaccard_distance), str(edit_distance), sent1,
                          sent2, len_sent1, len_sent2]
 
         output.append(lst)
         output_bert.append(lst_with_bert)
 
         # -------- add pairs with edit distances >= 8
-        if editDistance >= 8:
+        if edit_distance >= 8:
             output_E8.append(lst)
             ED_number_g8 += 1
 
@@ -106,7 +106,6 @@ def main():
     txt.close()
 
     CSV.write_data("outputs/output_with_berts.csv", output_bert, with_bert=True)
-    '''
     CSV.write_data("outputs/output.csv", output)
     CSV.write_data("outputs/output_e8.csv", output_E8, with_bert=True)
     print("++++++++++++++++++++++++++++++\nWriting done")
@@ -126,7 +125,6 @@ def main():
 
     jaccard_hist_df = pd.DataFrame(jaccard_hist)
     jaccard_hist_df.to_csv('outputs/jaccard_histogram.csv', index=False)
-    '''
 
 
 main()
