@@ -5,7 +5,7 @@ import math
 
 
 def edit_hist():
-    df = pd.read_csv('outputs/output.csv')
+    df = pd.read_csv('babel_outputs/output.csv')
     data = df["Levenshtein distance"].tolist()
     # buckets = edit distances
     bin_max = np.max(data)
@@ -17,7 +17,7 @@ def edit_hist():
 
 
 def jaccard_hist():
-    df = pd.read_csv('outputs/output.csv')
+    df = pd.read_csv('babel_outputs/output.csv')
     data = df["Jaccard distance"].tolist()
 
     # buckets = 0.05

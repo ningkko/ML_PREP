@@ -3,7 +3,7 @@ import pandas as pd
 # means of Jaccard distance(Bert == 1)
 # means of Jaccard distance(Bert == 0)
 
-df = pd.read_csv('../outputs/output_with_berts.csv')
+df = pd.read_csv('../babel_outputs/output_with_berts.csv')
 
 jaccard_bert0 = []
 jaccard_bert1 = []
@@ -28,16 +28,16 @@ for index, row in df.iterrows():
 
 print("writing...")
 # write to result
-with open("../outputs/mwUtest_data/J_bert0.txt", "w") as txt:
+with open("../babel_outputs/mwUtest_data/J_bert0.txt", "w") as txt:
     txt.write(str(jaccard_bert0))
 txt.close()
-with open("../outputs/mwUtest_data/J_bert1.txt", "w") as txt:
+with open("../babel_outputs/mwUtest_data/J_bert1.txt", "w") as txt:
     txt.write(str(jaccard_bert1))
 txt.close()
-with open("../outputs/mwUtest_data/E_bert0.txt", "w") as txt:
+with open("../babel_outputs/mwUtest_data/E_bert0.txt", "w") as txt:
     txt.write(str(edit_bert0))
 txt.close()
-with open("../outputs/mwUtest_data/E_bert1.txt", "w") as txt:
+with open("../babel_outputs/mwUtest_data/E_bert1.txt", "w") as txt:
     txt.write(str(edit_bert1))
 txt.close()
 

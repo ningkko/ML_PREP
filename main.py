@@ -83,7 +83,7 @@ def main():
     print("Calculation done.")
 
     '''
-    # print outputs for test
+    # print babel_outputs for test
     for o in output:
         print(o)
 
@@ -98,16 +98,16 @@ def main():
     print("-------------------------------------\n"
           "Writing results to file...")
 
-    txt = open("outputs/output.txt", "w")
+    txt = open("babel_outputs/output.txt", "w")
     txt.write("original_median: " + str(original_median) + "\n" +
               "original_mean: " + str(original_mean) + "\n" +
               "% of bert == 1: " + str(ED_number_g8 / ED_number_g8))
 
     txt.close()
 
-    CSV.write_data("outputs/output_with_berts.csv", output_bert, with_bert=True)
-    CSV.write_data("outputs/output.csv", output)
-    CSV.write_data("outputs/output_e8.csv", output_E8, with_bert=True)
+    CSV.write_data("babel_outputs/output_with_berts.csv", output_bert, with_bert=True)
+    CSV.write_data("babel_outputs/output.csv", output)
+    CSV.write_data("babel_outputs/output_e8.csv", output_E8, with_bert=True)
     print("++++++++++++++++++++++++++++++\nWriting done")
 
     # print("++++++++++++++++++++++++++++++++++++\n" +
@@ -121,10 +121,10 @@ def main():
     jaccard_hist = histogram.jaccard_hist()
 
     edit_hist_df = pd.DataFrame(edit_hist)
-    edit_hist_df.to_csv('outputs/edit_histogram.csv', index=False)
+    edit_hist_df.to_csv('babel_outputs/edit_histogram.csv', index=False)
 
     jaccard_hist_df = pd.DataFrame(jaccard_hist)
-    jaccard_hist_df.to_csv('outputs/jaccard_histogram.csv', index=False)
+    jaccard_hist_df.to_csv('babel_outputs/jaccard_histogram.csv', index=False)
 
 
 main()
