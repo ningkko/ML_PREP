@@ -23,7 +23,6 @@ plt.title("most_equiv Distribution")
 plt.show()
 most_equiv_hist = pd.value_counts(most_equiv)
 most_equiv_df = pd.DataFrame(most_equiv_hist)
-most_equiv_df.columns
 most_equiv_df.to_csv('../pmdm_outputs/most_equiv_histogram', index=False)
 
 

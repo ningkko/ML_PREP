@@ -60,17 +60,18 @@ file.close()
 # edit histogram
 edit_bin_max = np.max(edit_distances)
 
-plt.hist(edit_distances, density=True, bins=edit_bin_max)
+plt.hist(edit_distances, density=True, bins=edit_bin_max, range=(0, edit_bin_max+1))
 plt.title("Edit Distance Distribution")
 plt.show()
 
-edit_hist = np.histogram(edit_distances, bins=edit_bin_max)
+edit_hist = np.histogram(edit_distances, bins=edit_bin_max, range=(0, edit_bin_max+1))
 
 edit_hist_df = pd.DataFrame(edit_hist)
 edit_hist_df.to_csv('../msr_outputs/edit_histogram.csv', index=False)
 
 # jaccard histogram
-jaccard_bin_max = math.ceil(np.max(jaccard_distances) / 0.05)
+j_distance_max = np.max(jaccard_distances)
+jaccard_bin_max = int(math.ceil(j_distance_max) / 0.05)
 plt.hist(jaccard_distances, density=True, bins=jaccard_bin_max)
 plt.title("Jaccard Distance Distribution")
 plt.show()
