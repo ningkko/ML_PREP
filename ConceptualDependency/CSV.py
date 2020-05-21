@@ -1,5 +1,5 @@
 import csv
-
+import re
 
 def read_to_list(file_path, file_type):
     texts = []
@@ -16,7 +16,8 @@ def read_to_list(file_path, file_type):
             # because he was unable to breathe .']
             num1, num2 = row[0], row[1]
             bert_classification = row[2]
-            text1, text2 = row[3].replace(" .", ""), row[4].replace(" .", "")
+            text1 = row[3]
+            text2 = row[4]
 
             texts.append([num1, num2, bert_classification, text1, text2])
 

@@ -1,3 +1,3 @@
-original_median: 12.0
-original_mean: 12.3125
+original_median: 13.0
+original_mean: 13.3125
 % of bert == 1: 1.0

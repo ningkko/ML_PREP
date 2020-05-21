@@ -1,5 +1,8 @@
 import csv
 import scipy.stats as stats
+import re
+
+import string
 import nltk
 import numpy as np
 import pandas as pd
@@ -35,12 +38,17 @@ lengths = []
 
 index = 0
 for pairs in output_list:
+
     sent1 = pairs[3]
+    sent1_list = sent1.split(" ")
     sent2 = pairs[4]
-    len1 = len(sent1)
-    len2 = len(sent2)
+    sent2_list = sent2.split(" ")
+    len1 = len(sent1_list)
+    len2 = len(sent2_list)
     lengths.append(len1)
     lengths.append(len2)
+    print(len1)
+
 
     # distances
     edit_distance = editDistance(sent1, sent2)
@@ -65,8 +73,6 @@ plt.show()
 length_hist = np.histogram(lengths, bins=length_max, range=(0, length_max + 1))
 
 pd.DataFrame(length_hist).to_csv("../msr_outputs/length_output.csv", index=False)
-
-
 
 with open("../msr_outputs/msr_output.csv", 'w') as file:
     pen = csv.writer(file)
@@ -143,6 +149,3 @@ txt.write("quality vs Jaccard statistics: " + str(u_statistic_j) + "\n" +
           "P value: " + str(pVal_e))
 
 txt.close()
-
-
-
